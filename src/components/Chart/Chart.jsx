@@ -20,26 +20,55 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
 
     const lineChart = (
         dailyData.length
-            ?(
-            <Line
-                data={{
-                    labels: dailyData.map(({ date }) => date),
-                    datasets: [{
-                        data: dailyData.map(({ confirmed }) => confirmed),
-                        label: 'Infected',
-                        borderColor: '#3333ff',
-                        fill: true,
-                    }, {
-                        data: dailyData.map(({ deaths }) => deaths),
-                        label: 'Deaths',
-                        borderColor: 'red',
-                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                        fill: true,
-                    },
-                    ],
-                }}
-            />
-        ) : null
+            ? (
+                <Line
+                    data={{
+                        labels: dailyData.map(({ date }) => date),
+                        datasets: [{
+                            data: dailyData.map(({ confirmed }) => confirmed),
+                            label: 'Infected',
+                            borderColor: '#3333ff',
+                            fill: true,
+                        }, {
+                            data: dailyData.map(({ deaths }) => deaths),
+                            label: 'Deaths',
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                            fill: true,
+                        },
+                        ],
+                    }}
+                    options={{
+                        legend: {
+                            labels: {
+                                fontColor: '#C5CAE9'
+                            }
+                        },
+                        scales: {
+                            xAxes: [
+                                {
+                                    gridLines: {
+                                        color: "#455a64"
+                                    },
+                                    ticks: {
+                                        fontColor: "#C5CAE9",
+                                        fontSize: 12
+                                    }
+                                }],
+                            yAxes: [
+                                {
+                                    gridLines: {
+                                        color: "#455a64"
+                                    },
+                                    ticks: {
+                                        fontColor: "#C5CAE9",
+                                        fontSize: 12
+                                    }
+                                }]
+                        }
+                    }}
+                />
+            ) : null
     );
 
     const barChart = (
@@ -50,14 +79,36 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
                     datasets: [
                         {
                             label: 'People',
-                            backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+                            backgroundColor: ['rgba(0, 0, 255,0.8)', 'rgba(0, 255, 0,0.8)', 'rgba(255, 0, 0,0.8)'],
                             data: [confirmed.value, recovered.value, deaths.value],
                         },
                     ],
                 }}
                 options={{
                     legend: { display: false },
-                    title: { display: true, text: `Current state in ${country}` },
+                    title: { display: true, text: `Current state in ${country}`, fontColor: '#C5CAE9', fontSize: 14 },
+                    scales: {
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    color: "#455a64"
+                                },
+                                ticks: {
+                                    fontColor: "#C5CAE9",
+                                    fontSize: 12
+                                }
+                            }],
+                        yAxes: [
+                            {
+                                gridLines: {
+                                    color: "#455a64"
+                                },
+                                ticks: {
+                                    fontColor: "#C5CAE9",
+                                    fontSize: 12
+                                }
+                            }]
+                    }
                 }}
             />
         ) : null
